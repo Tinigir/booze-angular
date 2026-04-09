@@ -1,0 +1,14 @@
+<h1>Categories</h1>
+@if (isLoading()) {
+	<p>We are loading... Please wait...</p>
+	}@else{ @if(errorMessage()){
+	<p>{{ errorMessage() }}</p>
+	<button type="button" (click)="loadCategory()">RETRY!!!</button>
+	}@else {
+	<mat-list>
+	  @for(type of categoriesSignal(); track type.id){
+	  <mat-list-item>{{ type.label }}</mat-list-item>
+	  }
+	</mat-list>
+	} }
+	
