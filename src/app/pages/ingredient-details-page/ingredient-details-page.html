@@ -1,0 +1,11 @@
+<h1><strong>Ingredient details</strong></h1>
+
+@if (ingredientDetailsSignal(); as details) {
+  <p class="display-6">{{ details.name }}</p>
+  <img [src]="details.image" width="400" alt="Ingredient image" />
+
+  <h2>Description</h2>
+  @if (details.description === 'None') {
+    <p class="lead">Sorry, we didn't come up with anything</p>
+  }
+}

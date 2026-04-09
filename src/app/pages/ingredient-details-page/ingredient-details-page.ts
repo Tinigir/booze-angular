@@ -1,0 +1,49 @@
+import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
+import { IngredientsService } from '../../shared/services/ingredients-service';
+import { ActivatedRoute } from '@angular/router';
+import { IIngredientFullDTO } from '../../shared/models/ingredient-full-dto.intarface';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CocktailsService } from '../../shared/services/cocktails-service';
+import { ICocktailMinimalDTO } from '../../shared/models/cocktail-minimal-dto.intarface';
+
+@Component({
+  selector: 'app-ingredient-details-page',
+  imports: [],
+  templateUrl: './ingredient-details-page.html',
+  styleUrl: './ingredient-details-page.scss',
+})
+export class IngredientDetailsPage implements OnInit {
+  ingredientsService = inject(IngredientsService);
+  cocktailsService = inject(CocktailsService);
+  destroyRef = inject(DestroyRef);
+  activatedRoute = inject(ActivatedRoute);
+
+  isLoading = signal<boolean>(false);
+  errorMessage = signal<string | null>(null);
+  ingredientDetailsSignal= signal<IIngredientFullDTO | null>(null);
+  cocktailsSignal = signal<ICocktailMinimalDTO[]>([]);
+
+  ngOnInit(): void {
+    this.activatedRoute.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
+      this.loadIngredientDetails(params['id']);
+	  this.loadRelatedCocktails(params['id']);
+      console.log(params);
+    });
+  }
+
+  loadRelatedCocktails(id: string | number): void {
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+  
+}
+
+  loadIngredientDetails(id: string | number): void {
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+
+    this.ingredientsService.getIngredientDetails(id).subscribe((data) => {
+      this.ingredientDetailsSignal.set(data);
+      console.log(data);
+    });
+  }
+}

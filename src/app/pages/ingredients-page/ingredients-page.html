@@ -1,0 +1,73 @@
+<h1>Indredients</h1>
+
+@if (isLoading()) {
+  <p>We are loading... Please wait...</p>
+} @else {
+  @if (errorMessage()) {
+    <p>{{ errorMessage() }}</p>
+    <button type="button" (click)="loadIngredients()">RETRY!!!</button>
+  } @else {
+    <div>
+      @if (filters.type) {
+        <button (click)="filterByType('')">Reset filter by type</button>
+      }
+    </div>
+
+    <mat-form-field>
+      <mat-select [formControl]="alcoholicControl">
+        <mat-option [value]="null">Unset</mat-option>
+        <mat-option [value]="true">Alcoholic</mat-option>
+        <mat-option [value]="false">Non-alcoholic</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>
+          <span>Alcoholic</span>
+          <button mat-button (click)="setSort('alcoholic_asc')">↑</button>
+          <button mat-button (click)="setSort('alcoholic_desc')">↓</button>
+          <button mat-button [disabled]="sort == null" (click)="setSort(null)">Reset</button>
+        </th>
+        <th>
+          <span>Created at</span>
+          <button mat-button (click)="setSort('alcoholic_asc')">↑</button>
+          <button mat-button (click)="setSort('alcoholic_desc')">↓</button>
+          <button mat-button [disabled]="sort == null" (click)="setSort(null)">Reset</button>
+        </th>
+      </tr>
+
+      @for (ingredient of ingredientsSignal(); track ingredient.id) {
+        <tr>
+          <td>
+            <a
+              [routerLink]="['/ingredients', ingredient.id]"
+              class="text-decoration-none link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"
+              >{{ ingredient.name }}</a
+            >
+          </td>
+          <td>
+            <span>{{ ingredient.type }}</span>
+
+            @if (!filters.type) {
+              <button mat-button (click)="filterByType(ingredient.type)">Filter</button>
+            }
+          </td>
+          <td>
+            <span>{{ ingredient.contains_alcohol ? 'Yes' : 'No' }}</span>
+          </td>
+          <td>{{ ingredient.created_at }}</td>
+        </tr>
+      }
+    </table>
+
+    <div class="buttonNavigation">
+      <button mat-button (click)="moveToPrewPage()"><-</button>
+      <span>page:{{ pagination.currentPage }}</span>
+      <span>total:{{ pagination.totalPages }}</span>
+      <button mat-button (click)="moveToNextPage()">-></button>
+    </div>
+  }
+}
