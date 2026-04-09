@@ -28,7 +28,7 @@ export class CocktailsService {
       limit,
     };
 
-	const endpoint = type === 'common' ? '/cocktails' : `/cocktails/${type}`;
+    const endpoint = type === 'common' ? '/cocktails' : `/cocktails/${type}`;
 
     Object.entries(filters).forEach(([key, value]) => {
       if (value !== null && value !== 'null') {
@@ -48,10 +48,11 @@ export class CocktailsService {
 
   getAutocompleteOptions(q: string): Observable<IPaginatedResponse<ICocktailMinimalDTO>> {
     const params = {
+      q,
       page: 1,
       limit: 10,
-      q,
     };
+
     return this.http.get<IPaginatedResponse<ICocktailMinimalDTO>>(
       `${environment.boozeApiPath}/cocktails/autocomplete`,
       { params },

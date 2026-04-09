@@ -5,8 +5,8 @@ import { IIngredientFullDTO } from '../../shared/models/ingredient-full-dto.inta
 import { catchError, finalize, merge, of } from 'rxjs';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { MatFormField, MatOption, MatSelect } from "@angular/material/select";
-import { MatAnchor } from "@angular/material/button";
+import { MatFormField, MatOption, MatSelect } from '@angular/material/select';
+import { MatAnchor } from '@angular/material/button';
 
 export interface IIndredientsFilters {
   type: string;
@@ -56,20 +56,24 @@ export class IngredientsPage implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((queryParams) => {
         console.log('queryParams:', queryParams);
+
         if ('page' in queryParams) {
           this.pagination.currentPage = +queryParams['page'] || 1;
         }
+
         if ('sort' in queryParams) {
           this.sort = queryParams['sort'] || null;
         }
+
         if ('type' in queryParams) {
           this.filters.type = queryParams['type'] || '';
         }
+
         if ('alcoholic' in queryParams) {
           this.alcoholicControl.setValue(queryParams['alcoholic'] || null);
-        this.filters.alcoholic = queryParams['alcoholic'] || null;
+          this.filters.alcoholic = queryParams['alcoholic'] || null;
         }
-		this.loadIngredients();
+        this.loadIngredients();
       });
   }
 
@@ -91,7 +95,7 @@ export class IngredientsPage implements OnInit {
               pages: 0,
             },
           });
-        })
+        }),
       )
       .subscribe((ingredientsResponce) => {
         this.ingredientsSignal.set(ingredientsResponce.data);
@@ -99,14 +103,17 @@ export class IngredientsPage implements OnInit {
         this.pagination.totalPages = ingredientsResponce.pagination.pages;
       });
   }
+
   moveToNextPage(): void {
     this.pagination.currentPage = this.pagination.currentPage + 1;
     this.updateQuerryParams('page', this.pagination.currentPage.toString());
   }
+
   moveToPrewPage(): void {
     this.pagination.currentPage = this.pagination.currentPage - 1;
     this.updateQuerryParams('page', this.pagination.currentPage.toString());
   }
+
   filterByType(type: string): void {
     this.filters.type = type;
     this.resetPagination();
@@ -131,7 +138,6 @@ export class IngredientsPage implements OnInit {
         this.resetPagination();
         this.updateQuerryParams('alcoholic', alcoholic);
         this.filters.alcoholic = alcoholic;
-        
       });
   }
 

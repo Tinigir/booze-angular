@@ -84,7 +84,9 @@ export class CocktailsPage implements OnInit {
   }
 
   listenTypeControlChanges(): void {
-    this.typeControl.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((type) => {
+    this.typeControl.valueChanges
+	.pipe(takeUntilDestroyed(this.destroyRef))
+	.subscribe((type) => {
       this.resetPagination();
       this.updateQuerryParams('type', type);
     });
@@ -95,22 +97,28 @@ export class CocktailsPage implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((queryParams) => {
         console.log('queryParams:', queryParams);
+
         if ('page' in queryParams) {
           this.pagination.currentPage = +queryParams['page'] || 1;
         }
+
         if ('sort' in queryParams) {
           this.sort = queryParams['sort'] || null;
         }
+
         if ('glass_type' in queryParams) {
           this.filters.glass_type = queryParams['glass_type'] || '';
         }
+
         if ('alcoholic' in queryParams) {
           this.alcoholicControl.setValue(queryParams['alcoholic'] || null);
           this.filters.alcoholic = queryParams['alcoholic'] || null;
         }
+
         if ('category_id' in queryParams) {
           this.filters.category_id = queryParams['category_id'] || '';
         }
+
         if ('type' in queryParams) {
           const type = queryParams['type'] || 'common';
           this.typeControl.setValue(type, { emitEvent: false });
@@ -136,6 +144,7 @@ export class CocktailsPage implements OnInit {
         catchError((err) => {
           console.log('Error:', err);
           this.errorMessage.set('Oopsss... We fucked up!');
+
           return of({
             data: [],
             pagination: {
@@ -157,15 +166,18 @@ export class CocktailsPage implements OnInit {
     this.pagination.currentPage = this.pagination.currentPage + 1;
     this.updateQuerryParams('page', this.pagination.currentPage.toString());
   }
+
   moveToPrewPage(): void {
     this.pagination.currentPage = this.pagination.currentPage - 1;
     this.updateQuerryParams('page', this.pagination.currentPage.toString());
   }
+
   filterByGlassType(glassTypeId: string | number): void {
     this.filters.glass_type = glassTypeId.toString();
     this.resetPagination();
     this.updateQuerryParams('glass_type', glassTypeId.toString());
   }
+
   filterByCategory(category: string | number): void {
     this.filters.category_id = category.toString();
     this.resetPagination();

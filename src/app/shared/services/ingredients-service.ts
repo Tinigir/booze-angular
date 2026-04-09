@@ -46,10 +46,11 @@ export class IngredientsService {
 
   getAutocompleteIngredientsOptions(q: string): Observable<IPaginatedResponse<IIngredientFullDTO>> {
     const params = {
+      q,
       page: 1,
       limit: 10,
-      q,
     };
+
     return this.http.get<IPaginatedResponse<IIngredientFullDTO>>(
       `${environment.boozeApiPath}/ingredients/autocomplete`,
       { params },

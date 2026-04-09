@@ -20,13 +20,15 @@ export class IngredientDetailsPage implements OnInit {
 
   isLoading = signal<boolean>(false);
   errorMessage = signal<string | null>(null);
-  ingredientDetailsSignal= signal<IIngredientFullDTO | null>(null);
+  ingredientDetailsSignal = signal<IIngredientFullDTO | null>(null);
   cocktailsSignal = signal<ICocktailMinimalDTO[]>([]);
 
   ngOnInit(): void {
-    this.activatedRoute.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
+    this.activatedRoute.params
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe((params) => {
       this.loadIngredientDetails(params['id']);
-	  this.loadRelatedCocktails(params['id']);
+      this.loadRelatedCocktails(params['id']);
       console.log(params);
     });
   }
@@ -34,8 +36,7 @@ export class IngredientDetailsPage implements OnInit {
   loadRelatedCocktails(id: string | number): void {
     this.isLoading.set(true);
     this.errorMessage.set(null);
-  
-}
+  }
 
   loadIngredientDetails(id: string | number): void {
     this.isLoading.set(true);

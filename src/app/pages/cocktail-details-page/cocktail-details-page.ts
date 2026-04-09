@@ -20,7 +20,9 @@ export class CocktailDetailsPage implements OnInit {
   cocktailSignal = signal<ICocktailMinimalDTO | null>(null);
 
   ngOnInit(): void {
-    this.activatedRoute.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
+    this.activatedRoute.params
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe((params) => {
       this.loadIngredientDetails(params['id']);
       this.loadRelatedCocktails(params['id']);
       console.log(params);
