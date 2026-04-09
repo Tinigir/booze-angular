@@ -55,6 +55,7 @@
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="image">
         <th mat-header-cell *matHeaderCellDef>Image</th>
+
         <td mat-cell *matCellDef="let cocktail">
           <a [routerLink]="['/cocktails', cocktail.id]"
             ><img [src]="cocktail.image" alt="cocktail" width="100px" class="rounded shadow-sm" />
@@ -64,6 +65,7 @@
 
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
+
         <td mat-cell *matCellDef="let cocktail">
           <a
             [routerLink]="['/cocktails', cocktail.id]"
@@ -76,6 +78,7 @@
 
       <ng-container matColumnDef="glass_type">
         <th mat-header-cell *matHeaderCellDef>Glass type</th>
+
         <td mat-cell *matCellDef="let cocktail">
           <div class="d-flex align-items-center flex-column">
             {{ cocktail.glass_type.label }}
@@ -100,6 +103,7 @@
             <button mat-button (click)="setSort('alcoholic_desc')">↓</button>
           </div>
         </th>
+
         <td mat-cell *matCellDef="let cocktail">
           <span [class.text-danger]="cocktail.alcoholic">
             {{ cocktail.alcoholic ? 'Yes' : 'No' }}
@@ -124,6 +128,7 @@
 
       <ng-container matColumnDef="ingredients">
         <th mat-header-cell *matHeaderCellDef>Ingredients</th>
+
         <td mat-cell *matCellDef="let cocktail">
           @if (cocktail.ingredients && cocktail.ingredients.length > 4) {
             <button mat-button [matMenuTriggerFor]="menu" color="primary">
