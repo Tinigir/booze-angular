@@ -27,31 +27,33 @@ export class AutocompletesPage implements OnInit {
   cocktailsService = inject(CocktailsService);
   ingredientsServise = inject(IngredientsService);
 
-  cocktailFilteredOptions = signal<string[]>([]);
-  cocktailsSearchControl = new FormControl<string | null>(null);
   ingredientsFilteredOptions = signal<string[]>([]);
+  cocktailFilteredOptions = signal<string[]>([]);
+
   ingredientsSearchControl = new FormControl<string | null>(null);
+  cocktailsSearchControl = new FormControl<string | null>(null);
 
   ngOnInit(): void {
     this.listenCocktailsSearchControlChanges();
-	this.listenIngredientsSearchControlChanges();
+    this.listenIngredientsSearchControlChanges();
   }
 
   listenIngredientsSearchControlChanges(): void {
-    this.ingredientsSearchControl.valueChanges.pipe(
-      takeUntilDestroyed(this.destroyRef),
-      debounceTime(200),
-	  switchMap((searchIngredient)=>{
-		return this.ingredientsServise.getAutocompleteIngredientsOptions(searchIngredient ?? '');
-	  }),
-    )
-	.subscribe((ingredientsResponce)=>{
-		this.ingredientsFilteredOptions.set(
-			ingredientsResponce.data.map((ingredient)=>{
-				return ingredient.name;
-			})
-		)
-	})
+    this.ingredientsSearchControl.valueChanges
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        debounceTime(200),
+        switchMap((searchIngredient) => {
+          return this.ingredientsServise.getAutocompleteIngredientsOptions(searchIngredient ?? '');
+        }),
+      )
+      .subscribe((ingredientsResponce) => {
+        this.ingredientsFilteredOptions.set(
+          ingredientsResponce.data.map((ingredient) => {
+            return ingredient.name;
+          }),
+        );
+      });
   }
 
   listenCocktailsSearchControlChanges(): void {

@@ -25,6 +25,12 @@ export class IngredientsPage implements OnInit {
   activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
 
+  readonly alcoholicFilterOptions = [
+    { label: 'Unset', value: 'null' },
+    { label: 'Alcoholic', value: 'true' },
+    { label: 'Non-alcoholic', value: 'false' },
+  ];
+
   isLoading = signal<boolean>(false);
   errorMessage = signal<string | null>(null);
   ingredientsSignal = signal<IIngredientFullDTO[]>([]);
@@ -55,7 +61,6 @@ export class IngredientsPage implements OnInit {
     this.activatedRoute.queryParams
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((queryParams) => {
-
         if ('page' in queryParams) {
           this.pagination.currentPage = +queryParams['page'] || 1;
         }

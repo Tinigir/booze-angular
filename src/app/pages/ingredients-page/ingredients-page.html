@@ -15,9 +15,11 @@
 
     <mat-form-field>
       <mat-select [formControl]="alcoholicControl">
-        <mat-option [value]="null">Unset</mat-option>
-        <mat-option [value]="true">Alcoholic</mat-option>
-        <mat-option [value]="false">Non-alcoholic</mat-option>
+        @for (alcoholicFilterOption of alcoholicFilterOptions; track $index) {
+          <mat-option [value]="alcoholicFilterOption.value">
+            {{ alcoholicFilterOption.label }}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
 
@@ -43,8 +45,8 @@
         <tr>
           <td>
             <a
-              [routerLink]="['/ingredients', ingredient.id]"
               class="text-decoration-none link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"
+              [routerLink]="['/ingredients', ingredient.id]"
               >{{ ingredient.name }}</a
             >
           </td>

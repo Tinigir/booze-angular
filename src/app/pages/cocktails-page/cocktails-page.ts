@@ -38,6 +38,11 @@ export interface ICocktailsFilter {
   styleUrl: './cocktails-page.scss',
 })
 export class CocktailsPage implements OnInit {
+  cocktailsService = inject(CocktailsService);
+  destroyRef = inject(DestroyRef);
+  activatedRoute = inject(ActivatedRoute);
+  router = inject(Router);
+
   cocktails: any[] = [];
   displayedColumns: string[] = [
     'image',
@@ -49,11 +54,7 @@ export class CocktailsPage implements OnInit {
   ];
   dataSource = new MatTableDataSource<any>([]);
   typeControl = new FormControl<'common' | 'popular' | 'latest'>('common');
-
-  cocktailsService = inject(CocktailsService);
-  destroyRef = inject(DestroyRef);
-  activatedRoute = inject(ActivatedRoute);
-  router = inject(Router);
+  alcoholicControl = new FormControl<boolean | null>(null);
 
   isLoading = signal<boolean>(false);
   errorMessage = signal<string | null>(null);
@@ -75,8 +76,6 @@ export class CocktailsPage implements OnInit {
 
   sort: string | null = null;
 
-  alcoholicControl = new FormControl<boolean | null>(null);
-
   ngOnInit(): void {
     this.listenActivatedRouteChanges();
     this.listenAlcoholicControlChanges();
@@ -84,9 +83,7 @@ export class CocktailsPage implements OnInit {
   }
 
   listenTypeControlChanges(): void {
-    this.typeControl.valueChanges
-	.pipe(takeUntilDestroyed(this.destroyRef))
-	.subscribe((type) => {
+    this.typeControl.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((type) => {
       this.resetPagination();
       this.updateQuerryParams('type', type);
     });
@@ -96,7 +93,6 @@ export class CocktailsPage implements OnInit {
     this.activatedRoute.queryParams
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((queryParams) => {
-
         if ('page' in queryParams) {
           this.pagination.currentPage = +queryParams['page'] || 1;
         }
