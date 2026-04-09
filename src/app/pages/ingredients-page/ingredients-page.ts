@@ -55,7 +55,6 @@ export class IngredientsPage implements OnInit {
     this.activatedRoute.queryParams
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((queryParams) => {
-        console.log('queryParams:', queryParams);
 
         if ('page' in queryParams) {
           this.pagination.currentPage = +queryParams['page'] || 1;
@@ -86,7 +85,7 @@ export class IngredientsPage implements OnInit {
       .pipe(
         finalize(() => this.isLoading.set(false)),
         catchError((err) => {
-          console.log('Error:', err);
+          console.warn('Error:', err);
           this.errorMessage.set('Oopsss... We fucked up!');
           return of({
             data: [],

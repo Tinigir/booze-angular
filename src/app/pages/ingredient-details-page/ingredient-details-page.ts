@@ -29,7 +29,6 @@ export class IngredientDetailsPage implements OnInit {
     .subscribe((params) => {
       this.loadIngredientDetails(params['id']);
       this.loadRelatedCocktails(params['id']);
-      console.log(params);
     });
   }
 
@@ -44,7 +43,6 @@ export class IngredientDetailsPage implements OnInit {
 
     this.ingredientsService.getIngredientDetails(id).subscribe((data) => {
       this.ingredientDetailsSignal.set(data);
-      console.log(data);
     });
   }
 }

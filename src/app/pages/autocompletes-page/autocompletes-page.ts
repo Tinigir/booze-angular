@@ -69,7 +69,6 @@ export class AutocompletesPage implements OnInit {
             return cocktail.name;
           }),
         );
-        console.log(cocktailsResponse);
       });
   }
 }
