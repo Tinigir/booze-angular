@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ICocktailsFilter } from '../../pages/cocktails-page/cocktails-page';
-import { ICocktailMinimalDTO } from '../models/cocktail-minimal-dto.intarface';
+import { ICocktailMinimalDTO } from '../models/cocktail-minimal-dto.interface';
 import { IPaginatedResponse } from '../models/generic/pagination.interface';
 
 @Injectable({

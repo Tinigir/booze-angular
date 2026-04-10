@@ -1,6 +1,6 @@
 import { ICategory } from './category.interface';
 import { IGlassType } from './glass-type.interface';
-import { IIngredientFullDTO } from './ingredient-full-dto.intarface';
+import { IIngredientFullDTO } from './ingredient-full-dto.interface';
 
 export interface ICocktailMinimalDTO {
   alcoholic: boolean;

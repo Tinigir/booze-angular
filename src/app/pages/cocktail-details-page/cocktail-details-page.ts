@@ -1,7 +1,7 @@
 import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { ICocktailMinimalDTO } from '../../shared/models/cocktail-minimal-dto.intarface';
+import { ICocktailMinimalDTO } from '../../shared/models/cocktail-minimal-dto.interface';
 import { CocktailsService } from '../../shared/services/cocktails-service';
 
 @Component({

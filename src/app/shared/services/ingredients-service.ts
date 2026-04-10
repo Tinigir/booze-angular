@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { IIndredientsFilters } from '../../pages/ingredients-page/ingredients-page';
 import { IPaginatedResponse } from '../models/generic/pagination.interface';
-import { IIngredientFullDTO } from '../models/ingredient-full-dto.intarface';
+import { IIngredientFullDTO } from '../models/ingredient-full-dto.interface';
 
 @Injectable({
   providedIn: 'root',

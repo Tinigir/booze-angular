@@ -5,7 +5,7 @@ import { MatAnchor } from '@angular/material/button';
 import { MatFormField, MatOption, MatSelect } from '@angular/material/select';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { catchError, finalize, of } from 'rxjs';
-import { IIngredientFullDTO } from '../../shared/models/ingredient-full-dto.intarface';
+import { IIngredientFullDTO } from '../../shared/models/ingredient-full-dto.interface';
 import { IngredientsService } from '../../shared/services/ingredients-service';
 
 export interface IIndredientsFilters {

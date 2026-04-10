@@ -10,7 +10,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { catchError, finalize, of } from 'rxjs';
-import { ICocktailMinimalDTO } from '../../shared/models/cocktail-minimal-dto.intarface';
+import { ICocktailMinimalDTO } from '../../shared/models/cocktail-minimal-dto.interface';
 import { CocktailsService } from '../../shared/services/cocktails-service';
 
 export interface ICocktailsFilter {

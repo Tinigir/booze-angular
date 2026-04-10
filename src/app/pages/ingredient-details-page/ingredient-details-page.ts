@@ -1,8 +1,8 @@
 import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
-import { ICocktailMinimalDTO } from '../../shared/models/cocktail-minimal-dto.intarface';
-import { IIngredientFullDTO } from '../../shared/models/ingredient-full-dto.intarface';
+import { ICocktailMinimalDTO } from '../../shared/models/cocktail-minimal-dto.interface';
+import { IIngredientFullDTO } from '../../shared/models/ingredient-full-dto.interface';
 import { CocktailsService } from '../../shared/services/cocktails-service';
 import { IngredientsService } from '../../shared/services/ingredients-service';
 
