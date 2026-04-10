@@ -1,0 +1,9 @@
+<aside>
+  <nav>
+    <mat-nav-list>
+      @for (link of links; track link.title) {
+        <a mat-list-item [routerLink]="link.path">{{ link.title }}</a>
+      }
+    </mat-nav-list>
+  </nav>
+</aside>

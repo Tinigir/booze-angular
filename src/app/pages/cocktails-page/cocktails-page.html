@@ -1,0 +1,167 @@
+<h1>Cocktails</h1>
+@if (isLoading()) {
+  <p>We are loading... Please wait...</p>
+} @else {
+  @if (errorMessage()) {
+    <p>{{ errorMessage() }}</p>
+    <button mat-button type="button" (click)="loadCocktails()">RETRY!!!</button>
+  } @else {
+    <div>
+      @if (filters.glass_type) {
+        <button mat-button (click)="filterByGlassType('')">Reset filter by glass type</button>
+      }
+    </div>
+    <div>
+      @if (filters.category_id) {
+        <button mat-button (click)="filterByCategory('')">Reset filter by category</button>
+      }
+    </div>
+
+    <div class="container-fluid mt-3">
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-4">
+          <h3 class="m-0">Cocktails List</h3>
+        </div>
+
+        <div class="col-md-8 d-flex justify-content-end">
+          <mat-button-toggle-group
+            name="cocktailType"
+            aria-label="Cocktail Type"
+            [formControl]="typeControl"
+          >
+            <mat-button-toggle value="common">Common</mat-button-toggle>
+            <mat-button-toggle value="popular">Popular</mat-button-toggle>
+            <mat-button-toggle value="latest">Latest</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <table class="mat-elevation-z8 w-100" mat-table [dataSource]="dataSource"></table>
+        </div>
+      </div>
+    </div>
+
+    <mat-form-field>
+      <mat-label>Select an option</mat-label>
+      <mat-select [formControl]="alcoholicControl">
+        <mat-option [value]="null">Unset</mat-option>
+        <mat-option [value]="true">Alcoholic</mat-option>
+        <mat-option [value]="false">Non-alcoholic</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef>Image</th>
+
+        <td mat-cell *matCellDef="let cocktail">
+          <a [routerLink]="['/cocktails', cocktail.id]">
+            <img alt="cocktail" class="rounded shadow-sm" width="100px" [src]="cocktail.image" />
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+
+        <td mat-cell *matCellDef="let cocktail">
+          <a
+            [routerLink]="['/cocktails', cocktail.id]"
+            class="text-decoration-none link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"
+          >
+            {{ cocktail.name }}
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="glass_type">
+        <th mat-header-cell *matHeaderCellDef>Glass type</th>
+
+        <td mat-cell *matCellDef="let cocktail">
+          <div class="d-flex align-items-center flex-column">
+            {{ cocktail.glass_type.label }}
+
+            @if (!filters.glass_type) {
+              <button
+                class="btn btn-sm btn-light border shadow-sm py-0"
+                mat-button
+                (click)="filterByGlassType(cocktail.glass_type.id)"
+              >
+                Filter
+              </button>
+            }
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="alcoholic">
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="d-flex align-items-center">
+            Alcoholic
+            <button mat-button (click)="setSort('alcoholic_asc')">↑</button>
+            <button mat-button (click)="setSort('alcoholic_desc')">↓</button>
+          </div>
+        </th>
+
+        <td mat-cell *matCellDef="let cocktail">
+          <span [class.text-danger]="cocktail.alcoholic">
+            {{ cocktail.alcoholic ? 'Yes' : 'No' }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef>Category</th>
+        <td mat-cell *matCellDef="let cocktail">
+          <div class="d-flex align-items-center flex-column">
+            {{ cocktail.category.label }}
+
+            @if (!filters.category_id) {
+              <button mat-button color="accent" (click)="filterByCategory(cocktail.category.id)">
+                Filter
+              </button>
+            }
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ingredients">
+        <th mat-header-cell *matHeaderCellDef>Ingredients</th>
+
+        <td mat-cell *matCellDef="let cocktail">
+          @if (cocktail.ingredients && cocktail.ingredients.length > 4) {
+            <button mat-button [matMenuTriggerFor]="menu" color="primary">
+              {{ cocktail.ingredients.length }} ingredients
+              <mat-icon fontIcon="expand_more"></mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu">
+              @for (ingredient of cocktail.ingredients; track ingredient.id) {
+                <a
+                  class="d-block small text-decoration-none"
+                  [routerLink]="['/ingredients', ingredient.id]"
+                >
+                  {{ ingredient.name }}
+                </a>
+              }
+            </mat-menu>
+          } @else {
+            @for (ingredient of cocktail.ingredients; track ingredient.id) {
+              <a
+                class="d-block small text-decoration-none"
+                [routerLink]="['/ingredients', ingredient.id]"
+              >
+                {{ ingredient.name }}
+              </a>
+            }
+          }
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  }
+}

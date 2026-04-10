@@ -1,0 +1,15 @@
+<h1>Cocktail</h1>
+
+@if (cocktailSignal(); as details) {
+  <p>{{ details.name }}</p>
+  <img [src]="details.image" width="200" alt="Ingredient image" />
+
+  <h3>Ingredients</h3>
+  <ul>
+    @for (ingredient of details.ingredients; track ingredient.id) {
+      <li>
+        <a [routerLink]="['/ingredients', ingredient.id]">{{ ingredient.name }}</a>
+      </li>
+    }
+  </ul>
+}

@@ -1,0 +1,19 @@
+<h1>Glass Types</h1>
+@if (isLoading()) {
+  <p>We are loading... Please wait...</p>
+} @else {
+  @if (errorMessage()) {
+    <p>{{ errorMessage() }}</p>
+    <button type="button" (click)="loadGlassTypes()">RETRY!!!</button>
+  } @else {
+    <mat-list>
+      @for (type of glassTypesSignal(); track type.id) {
+        <mat-list-item>
+          <span>
+			{{ type.label }}
+		  </span>
+        </mat-list-item>
+      }
+    </mat-list>
+  }
+}
