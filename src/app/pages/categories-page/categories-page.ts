@@ -1,8 +1,8 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { CategoriesService } from '../../shared/services/categories-service';
-import { ICategory } from '../../shared/models/category.interface';
-import { catchError, finalize, of } from 'rxjs';
 import { MatList, MatListItem } from "@angular/material/list";
+import { catchError, finalize, of } from 'rxjs';
+import { ICategory } from '../../shared/models/category.interface';
+import { CategoriesService } from '../../shared/services/categories-service';
 
 @Component({
   selector: 'app-categories-page',

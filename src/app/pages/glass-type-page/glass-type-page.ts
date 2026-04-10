@@ -1,8 +1,8 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { GlassTypeService } from '../../shared/services/glass-type-service';
-import { IGlassType } from '../../shared/models/glass-type.interface';
-import { catchError, finalize, of } from 'rxjs';
 import { MatListItem, MatListModule } from "@angular/material/list";
+import { catchError, finalize, of } from 'rxjs';
+import { IGlassType } from '../../shared/models/glass-type.interface';
+import { GlassTypeService } from '../../shared/services/glass-type-service';
 
 @Component({
   selector: 'app-glass-type-page',

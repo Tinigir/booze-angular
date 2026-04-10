@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { GlassTypePage } from './pages/glass-type-page/glass-type-page';
-import { CategoriesPage } from './pages/categories-page/categories-page';
-import { IngredientsPage } from './pages/ingredients-page/ingredients-page';
-import { IngredientDetailsPage } from './pages/ingredient-details-page/ingredient-details-page';
-import { CocktailsPage } from './pages/cocktails-page/cocktails-page';
-import { CocktailDetailsPage } from './pages/cocktail-details-page/cocktail-details-page';
 import { AutocompletesPage } from './pages/autocompletes-page/autocompletes-page';
+import { CategoriesPage } from './pages/categories-page/categories-page';
+import { CocktailDetailsPage } from './pages/cocktail-details-page/cocktail-details-page';
+import { CocktailsPage } from './pages/cocktails-page/cocktails-page';
+import { GlassTypePage } from './pages/glass-type-page/glass-type-page';
+import { IngredientDetailsPage } from './pages/ingredient-details-page/ingredient-details-page';
+import { IngredientsPage } from './pages/ingredients-page/ingredients-page';
 
 export const routes: Routes = [
   { path: '', component: GlassTypePage },

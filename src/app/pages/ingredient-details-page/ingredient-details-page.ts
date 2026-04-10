@@ -1,10 +1,10 @@
 import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
-import { IngredientsService } from '../../shared/services/ingredients-service';
-import { ActivatedRoute } from '@angular/router';
-import { IIngredientFullDTO } from '../../shared/models/ingredient-full-dto.intarface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { CocktailsService } from '../../shared/services/cocktails-service';
+import { ActivatedRoute } from '@angular/router';
 import { ICocktailMinimalDTO } from '../../shared/models/cocktail-minimal-dto.intarface';
+import { IIngredientFullDTO } from '../../shared/models/ingredient-full-dto.intarface';
+import { CocktailsService } from '../../shared/services/cocktails-service';
+import { IngredientsService } from '../../shared/services/ingredients-service';
 
 @Component({
   selector: 'app-ingredient-details-page',

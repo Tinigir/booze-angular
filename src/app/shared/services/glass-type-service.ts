@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IGlassType } from '../models/glass-type.interface';
 import { environment } from '../../../environments/environment';
+import { IGlassType } from '../models/glass-type.interface';
 
 @Injectable({
   providedIn: null,

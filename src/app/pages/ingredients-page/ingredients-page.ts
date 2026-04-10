@@ -1,12 +1,12 @@
 import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { IngredientsService } from '../../shared/services/ingredients-service';
-import { IIngredientFullDTO } from '../../shared/models/ingredient-full-dto.intarface';
-import { catchError, finalize, merge, of } from 'rxjs';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { MatFormField, MatOption, MatSelect } from '@angular/material/select';
 import { MatAnchor } from '@angular/material/button';
+import { MatFormField, MatOption, MatSelect } from '@angular/material/select';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { catchError, finalize, of } from 'rxjs';
+import { IIngredientFullDTO } from '../../shared/models/ingredient-full-dto.intarface';
+import { IngredientsService } from '../../shared/services/ingredients-service';
 
 export interface IIndredientsFilters {
   type: string;

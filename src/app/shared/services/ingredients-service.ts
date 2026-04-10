@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IPaginatedResponse } from '../models/generic/pagination.interface';
-import { IIngredientFullDTO } from '../models/ingredient-full-dto.intarface';
 import { environment } from '../../../environments/environment';
 import { IIndredientsFilters } from '../../pages/ingredients-page/ingredients-page';
-import { ICocktailMinimalDTO } from '../models/cocktail-minimal-dto.intarface';
+import { IPaginatedResponse } from '../models/generic/pagination.interface';
+import { IIngredientFullDTO } from '../models/ingredient-full-dto.intarface';
 
 @Injectable({
   providedIn: 'root',

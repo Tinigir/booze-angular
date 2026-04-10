@@ -1,17 +1,17 @@
 import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { ICocktailMinimalDTO } from '../../shared/models/cocktail-minimal-dto.intarface';
-import { CocktailsService } from '../../shared/services/cocktails-service';
-import { catchError, finalize, of } from 'rxjs';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatOption, MatSelect, MatLabel, MatFormField } from '@angular/material/select';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatFormField, MatLabel, MatOption, MatSelect } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { catchError, finalize, of } from 'rxjs';
+import { ICocktailMinimalDTO } from '../../shared/models/cocktail-minimal-dto.intarface';
+import { CocktailsService } from '../../shared/services/cocktails-service';
 
 export interface ICocktailsFilter {
   glass_type: string;
